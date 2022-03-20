@@ -18,6 +18,7 @@ int main()
 
     PlaySong q("Реквизиты\\Music\\Menu_Song.ogg");
     q.Play();
+    PlaySong q2("Реквизиты\\Music\\Fly.ogg");
 
     const Color colorArr[6] = { Color::Magenta, Color::Red, Color::Cyan, Color::White, Color::Yellow, Color::Green };
 
@@ -51,6 +52,8 @@ int main()
                 if (event.type == Event::KeyPressed)
                     if (event.key.code == Keyboard::Enter)
                     {
+                        q.Stop();
+                        q2.Play();
                         scene++;
                         continue;
                     }
