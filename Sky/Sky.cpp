@@ -48,6 +48,12 @@ int main()
                 if (event.type == Event::KeyPressed)
                     if (event.key.code == Keyboard::Escape)
                         window.close();
+                if (event.type == Event::KeyPressed)
+                    if (event.key.code == Keyboard::Enter)
+                    {
+                        scene++;
+                        continue;
+                    }
             }
             window.clear();
             while (i <= 6)
@@ -57,6 +63,27 @@ int main()
                 txt2.setFillColor(colorArr[i]);
                 window.draw(txt);
                 window.draw(txt2);
+                window.display();
+                Sleep(100);
+                i++;
+            }
+        }
+        if (scene == 2)
+        {
+            int i = 1;
+            Event event;
+
+            while (window.pollEvent(event))
+            {
+                if (event.type == Event::KeyPressed)
+                    if (event.key.code == Keyboard::Escape)
+                        window.close();
+            }
+            window.clear();
+            while (i <= 31)
+            {
+                Anim r("Реквизиты\\sky\\", i);
+                r.go_anim(window);
                 window.display();
                 i++;
             }

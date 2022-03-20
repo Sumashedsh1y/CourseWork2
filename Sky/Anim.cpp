@@ -5,5 +5,5 @@ void Anim::go_anim(RenderWindow& win)
 	str = dir + to_string(cnt) + ".jpg";
 	BackDoor q(str);
 	win.draw(q.SetBack());
-	Sleep(100);
+	Sleep(10);
 }
