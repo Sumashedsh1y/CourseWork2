@@ -34,6 +34,14 @@ int main()
             txt.setCharacterSize(90);
             txt.setOutlineThickness(4.0f);
             txt.setPosition(10, 850);
+            txt.setFillColor(Color::Red);
+
+            Text txt2;
+            txt2.setFont(font);
+            txt2.setString(L"Выберите летательный аппарат");
+            txt2.setCharacterSize(90);
+            txt2.setOutlineThickness(4.0f);
+            txt2.setPosition(550, 700);
 
             while (window.pollEvent(event))
             {
@@ -46,8 +54,9 @@ int main()
             {
                 Anim q("Реквизиты\\menu\\", i);
                 q.go_anim(window);
-                txt.setFillColor(colorArr[i]);
+                txt2.setFillColor(colorArr[i]);
                 window.draw(txt);
+                window.draw(txt2);
                 window.display();
                 i++;
             }
