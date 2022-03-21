@@ -83,7 +83,7 @@ int main()
                         window.close();
             }
             window.clear();
-            while (i <= 9)
+            while (i < 9)
             {
                 Anim r("Реквизиты\\sky\\", i);
                 r.go_anim(window);
