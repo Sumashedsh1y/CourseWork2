@@ -27,7 +27,8 @@ int main()
 
     int i = 1;
     int w = 1;
-
+    int s = 1;
+    UFO ufo1(50, 150);
     while (window.isOpen())
     {
         if (scene == 1)
@@ -69,6 +70,8 @@ int main()
             Anim q("Реквизиты\\menu\\", i);
             q.go_anim(window);
             txt2.setFillColor(colorArr[i]);
+            
+            
             window.draw(txt);
             window.draw(txt2);
             window.display();
@@ -96,8 +99,18 @@ int main()
 
             Anim r("Реквизиты\\sky\\", i);
             r.go_anim(window);
-            Sleep(100);
-            if (i < 8)
+            Sleep(30);
+
+            ufo1.Move(0.1);
+            ufo1.setS(s);
+            if (s < 16)
+                s++;
+            else
+                s = 1;
+
+            window.draw(ufo1.ufo());
+
+            if (i < 6)
                 i++;
             else
                 i = 1;
@@ -105,7 +118,7 @@ int main()
             if (wind == 1) {
                 Png W("Реквизиты\\wind\\", w);
                 W.go_anim(window);
-                Sleep(10);
+                Sleep(1);
                 if (w < 29)
                     w++;
                 else
