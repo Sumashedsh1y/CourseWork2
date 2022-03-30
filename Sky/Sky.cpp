@@ -4,6 +4,7 @@
 #include "PlaySong.h"
 #include "UFO.h"
 #include "Anim.h"
+#include "GifPng.h"
 using namespace std;
 using namespace sf;
 int main()
@@ -22,11 +23,15 @@ int main()
 
     const Color colorArr[6] = { Color::Magenta, Color::Red, Color::Cyan, Color::White, Color::Yellow, Color::Green };
 
+    int wind = 0;
+
+    int i = 1;
+    int w = 1;
+
     while (window.isOpen())
     {
         if (scene == 1)
         {
-            int i = 1;
             Event event;
 
             Text txt;
@@ -54,26 +59,28 @@ int main()
                     {
                         q.Stop();
                         q2.Play();
+                        i = 1;
                         scene++;
                         continue;
                     }
             }
             window.clear();
-            while (i <= 6)
-            {
-                Anim q("Реквизиты\\menu\\", i);
-                q.go_anim(window);
-                txt2.setFillColor(colorArr[i]);
-                window.draw(txt);
-                window.draw(txt2);
-                window.display();
-                Sleep(100);
+
+            Anim q("Реквизиты\\menu\\", i);
+            q.go_anim(window);
+            txt2.setFillColor(colorArr[i]);
+            window.draw(txt);
+            window.draw(txt2);
+            window.display();
+            Sleep(100);
+            if (i < 6)
                 i++;
-            }
+            else
+                i = 1;
+
         }
         if (scene == 2)
         {
-            int i = 1;
             Event event;
 
             while (window.pollEvent(event))
@@ -81,16 +88,30 @@ int main()
                 if (event.type == Event::KeyPressed)
                     if (event.key.code == Keyboard::Escape)
                         window.close();
+                if (event.type == Event::KeyPressed)
+                    if (event.key.code == Keyboard::Space)
+                        wind = 1;
             }
             window.clear();
-            while (i < 9)
-            {
-                Anim r("Реквизиты\\sky\\", i);
-                r.go_anim(window);
-                window.display();
-                Sleep(100);
+
+            Anim r("Реквизиты\\sky\\", i);
+            r.go_anim(window);
+            Sleep(100);
+            if (i < 8)
                 i++;
+            else
+                i = 1;
+
+            if (wind == 1) {
+                Png W("Реквизиты\\wind\\", w);
+                W.go_anim(window);
+                Sleep(10);
+                if (w < 29)
+                    w++;
+                else
+                    w = 1;
             }
+            window.display();
         }
     }
     return 0;

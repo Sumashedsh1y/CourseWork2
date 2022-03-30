@@ -146,6 +146,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BackDoor.cpp" />
+    <ClCompile Include="GifPng.cpp" />
     <ClCompile Include="PlaySong.cpp" />
     <ClCompile Include="Sky.cpp" />
     <ClCompile Include="Anim.cpp" />
@@ -154,6 +155,7 @@
   <ItemGroup>
     <ClInclude Include="BackDoor.h" />
     <ClInclude Include="Anim.h" />
+    <ClInclude Include="GifPng.h" />
     <ClInclude Include="PlaySong.h" />
     <ClInclude Include="UFO.h" />
   </ItemGroup>
