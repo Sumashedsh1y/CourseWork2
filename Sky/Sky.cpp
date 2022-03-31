@@ -28,6 +28,7 @@ int main()
     int i = 1;
     int w = 1;
     int s = 1;
+    UFO ufo(780, 400);
     UFO ufo1(50, 150);
     while (window.isOpen())
     {
@@ -50,6 +51,13 @@ int main()
             txt2.setOutlineThickness(4.0f);
             txt2.setPosition(550, 700);
 
+            Text txt3;
+            txt3.setFont(font);
+            txt3.setString(L"Windbreaker : Press Enter");
+            txt3.setCharacterSize(70);
+            txt3.setOutlineThickness(4.0f);
+            txt3.setPosition(700, 500);
+
             while (window.pollEvent(event))
             {
                 if (event.type == Event::KeyPressed)
@@ -70,10 +78,18 @@ int main()
             Anim q("Реквизиты\\menu\\", i);
             q.go_anim(window);
             txt2.setFillColor(colorArr[i]);
-            
-            
+            txt3.setFillColor(colorArr[i/3]);
+
+            ufo.setS(s);
+            if (s < 16)
+                s++;
+            else
+                s = 1;
+            window.draw(ufo.ufo());
+
             window.draw(txt);
             window.draw(txt2);
+            window.draw(txt3);
             window.display();
             Sleep(100);
             if (i < 6)
@@ -108,8 +124,6 @@ int main()
             else
                 s = 1;
 
-            window.draw(ufo1.ufo());
-
             if (i < 6)
                 i++;
             else
@@ -124,6 +138,7 @@ int main()
                 else
                     w = 1;
             }
+            window.draw(ufo1.ufo());
             window.display();
         }
     }
