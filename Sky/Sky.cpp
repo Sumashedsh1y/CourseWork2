@@ -117,7 +117,7 @@ int main()
             r.go_anim(window);
             Sleep(30);
 
-            ufo1.Move(0.1);
+            ufo1.Move(0.5);
             ufo1.setS(s);
             if (s < 16)
                 s++;
