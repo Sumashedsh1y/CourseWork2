@@ -9,20 +9,22 @@ using namespace sf;
 class UFO
 {	
 public:
-	Vector2f pos;
 	int s = 1;
-	double x = 50, y = 150, i=0, phi=0, vx=0, vy=0, omega;
+	float x = 50, y = 150, i=0, phi=0, vx=0, vy=0;
+	Vector2f pos;
 	float v_phi = 0;
 	float a_phi = 0;
 	Vector2f a;
 	Vector2f v;
+	float thrust = 1;
 	Sprite herosprite;Texture herotexture;
 	Sprite& Get() {
 		return herosprite;
 	}
 
-	UFO(int x, int y, int m = 0) : x(x), y(y)
+	UFO(int x, int y) : x(x), y(y)
 	{
+		pos = Vector2f(x, y);
 		string str;
 		str = "Реквизиты\\UFO\\" + to_string(s) + ".png";
 		
@@ -40,7 +42,7 @@ public:
 		float Vp = v.x * up.x + v.y * up.y;
 		a += -up * (Vp * Vp);
 
-		a += forward;
+		a += forward * thrust;
 
 		v += a * dt;
 		v_phi += a_phi * dt;
@@ -53,6 +55,8 @@ public:
 
 		herosprite.setRotation(phi);
 		herosprite.setPosition(pos);
+
+		a_phi = 0;
 	}
 
 	Sprite ufo();
