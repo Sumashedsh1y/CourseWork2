@@ -111,11 +111,11 @@ int main()
                     if (event.key.code == Keyboard::Space)
                         wind = 1;
                     if (event.key.code == Keyboard::W)
-                        ufo1.thrust +=1;
+                        ufo1.thrust += 1;
                     if (event.key.code == Keyboard::S)
-                        ufo1.thrust -=1;
+                        ufo1.thrust -= 1;
                     if (event.key.code == Keyboard::D)
-                        ufo1.a_phi +=1;
+                        ufo1.a_phi += 1;
                     if (event.key.code == Keyboard::A)
                         ufo1.a_phi -= 1;
                 }
@@ -126,7 +126,7 @@ int main()
             r.go_anim(window);
             Sleep(30);
 
-            ufo1.Move(0.5);
+            ufo1.Move(0.1f);
             ufo1.setS(s);
             if (s < 16)
                 s++;
