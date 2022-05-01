@@ -42,9 +42,11 @@ public:
 	void Move(float dt) {
 
 		a = Vector2f(0, 0);
-		a.y += m * 9.8; // типа сила гравитации
+		a.y += m * 9.8; // Сила гравитации
+
 		Vector2f forward = Vector2f(cosf(phi), sinf(phi));
 		Vector2f up = Vector2f(cosf(phi + Pi / 2.0f), sinf(phi + Pi / 2.0f));
+
 		float Vp = v.x * up.x + v.y * up.y;
 		a += -up * (Vp * Vp);
 
