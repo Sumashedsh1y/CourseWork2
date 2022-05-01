@@ -15,22 +15,17 @@ class UFO
 {	
 public:
 	int s = 1, i = 0;
-	float x = 50, y = 150;
+	double x = 50, y = 150;
 
-	float m, phi = 0, vx = 0, vy = 0;
-	Vector2f pos;
-	float v_phi = 0;
-	float a_phi = 0;
-	Vector2f a;
-	Vector2f dv;
-	float thrust = 1;
+	double vX, vY, m, phi;
+	double Fup, Fdown, Fgo, Fstop;
 
 	Sprite herosprite;Texture herotexture;
 	Sprite& Get() {
 		return herosprite;
 	}
 
-	UFO(int x, int y, int m = 1) : x(x), y(y), m(m)
+	UFO(int x, int y, int v =0, int m = 100, int phi = 0) : x(x), y(y), vX(v), vY(v), m(m), phi(phi)
 	{
 		string str;
 		str = "Реквизиты\\UFO\\" + to_string(s) + ".png";
@@ -39,33 +34,21 @@ public:
 		herosprite.setPosition(Vector2f(x, y));
 	}
 
-	void Move(float dt) {
+	void Move(double dt) {
 
-		a = Vector2f(0, 0);
-		a.y += m * 9.8; // Сила гравитации
+		Fdown = m * 9.8; // Сила притяжения
+		Fup = 0.5 * vY * cos(phi);
+		Fstop = 0.5 * vX * cos(phi);
+		Fgo = diff(vX * m) / dt;
 
-		Vector2f forward = Vector2f(cosf(phi), sinf(phi));
-		Vector2f up = Vector2f(cosf(phi + Pi / 2.0f), sinf(phi + Pi / 2.0f));
+		vX += Fgo - Fstop;
+		vY += Fdown - Fup;
 
-		float Vp = dv.x * up.x + dv.y * up.y;
-		a -= up * (Vp * Vp);
-
-		a += forward * thrust;
-
-		dv += a * dt; // a = dv / dt
-		v_phi += a_phi * dt;
-
-		dv *= exp(-dt);
-		v_phi *= exp(-dt);
-
-		phi += v_phi * dt;
-		pos += dv * dt;
+		x += vX * dt;
+		y += vY * dt;
 
 		herosprite.setRotation(phi);
-		herosprite.setPosition(pos);
-
-		a_phi = 0;
-
+		herosprite.setPosition(Vector2f(x, y));
 	}
 
 	Sprite ufo();

@@ -29,7 +29,7 @@ int main()
     int w = 1;
     int s = 1;
     UFO ufo(780, 400);
-    UFO ufo1(100, 450);
+    UFO ufo1(100, 200);
     while (window.isOpen())
     {
         if (scene == 1)
@@ -109,7 +109,7 @@ int main()
 
             Text txt2;
             txt2.setFont(font);
-            txt2.setString("X ="+to_string(ufo1.pos.x) + "\nY =" + to_string(ufo1.pos.y));
+            txt2.setString("X ="+to_string(ufo1.x) + "\nY =" + to_string(ufo1.y));
             txt2.setCharacterSize(30);
             txt2.setOutlineThickness(4.0f);
             txt2.setPosition(10, 1000);
@@ -124,14 +124,6 @@ int main()
                 if (event.type == Event::KeyPressed) {
                     if (event.key.code == Keyboard::Space)
                         wind = 1;
-                    if (event.key.code == Keyboard::W)
-                        ufo1.thrust += 1;
-                    if (event.key.code == Keyboard::S)
-                        ufo1.thrust -= 1;
-                    if (event.key.code == Keyboard::D)
-                        ufo1.a_phi += 1;
-                    if (event.key.code == Keyboard::A)
-                        ufo1.a_phi -= 1;
                 }
             }
             window.clear();
@@ -140,7 +132,7 @@ int main()
             r.go_anim(window);
             Sleep(30);
 
-            ufo1.Move(0.1f);
+            ufo1.Move(1e-2f);
             ufo1.setS(s);
             if (s < 16)
                 s++;
