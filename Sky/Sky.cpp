@@ -100,6 +100,20 @@ int main()
         }
         if (scene == 2)
         {
+            Text txt;
+            txt.setFont(font);
+            txt.setString(to_string(ufo1.phi));
+            txt.setCharacterSize(30);
+            txt.setOutlineThickness(4.0f);
+            txt.setPosition(10, 900);
+
+            Text txt2;
+            txt2.setFont(font);
+            txt2.setString("X ="+to_string(ufo1.pos.x) + "\nY =" + to_string(ufo1.pos.y));
+            txt2.setCharacterSize(30);
+            txt2.setOutlineThickness(4.0f);
+            txt2.setPosition(10, 1000);
+
             Event event;
 
             while (window.pollEvent(event))
@@ -147,6 +161,8 @@ int main()
                 else
                     w = 1;
             }
+            window.draw(txt);
+            window.draw(txt2);
             window.draw(ufo1.ufo());
             window.display();
         }
