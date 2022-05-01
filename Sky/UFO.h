@@ -6,10 +6,10 @@
 #define Pi 3.14
 using namespace std;
 using namespace sf;
-static double diff(double x)
+static float diff(float x)
 {
-	const double h = 1e-10;
-	return ((x + h) - (x - h)) / (2.0 * h);
+	const float h = 1e-10;
+	return ((x + h) - (x - h)) / (2.0f * h);
 }
 class UFO
 {	
@@ -22,7 +22,7 @@ public:
 	float v_phi = 0;
 	float a_phi = 0;
 	Vector2f a;
-	Vector2f v;
+	Vector2f dv;
 	float thrust = 1;
 
 	Sprite herosprite;Texture herotexture;
@@ -47,19 +47,19 @@ public:
 		Vector2f forward = Vector2f(cosf(phi), sinf(phi));
 		Vector2f up = Vector2f(cosf(phi + Pi / 2.0f), sinf(phi + Pi / 2.0f));
 
-		float Vp = v.x * up.x + v.y * up.y;
-		a += -up * (Vp * Vp);
+		float Vp = dv.x * up.x + dv.y * up.y;
+		a -= up * (Vp * Vp);
 
 		a += forward * thrust;
 
-		v += a * dt;
+		dv += a * dt; // a = dv / dt
 		v_phi += a_phi * dt;
 
-		v *= exp(-dt);
+		dv *= exp(-dt);
 		v_phi *= exp(-dt);
 
 		phi += v_phi * dt;
-		pos += v * dt;
+		pos += dv * dt;
 
 		herosprite.setRotation(phi);
 		herosprite.setPosition(pos);
