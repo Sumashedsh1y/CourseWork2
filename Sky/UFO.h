@@ -6,10 +6,10 @@
 #define Pi 3.14
 using namespace std;
 using namespace sf;
-static float diff(float x)
+static float diff(float func, float x)
 {
 	const float h = 1e-10;
-	return ((x + h) - (x - h)) / (2.0f * h);
+	return (func * (x + h) - func * (x - h)) / (2.0f * h);
 }
 class UFO
 {	
@@ -25,7 +25,7 @@ public:
 		return herosprite;
 	}
 
-	UFO(int x, int y, int v =0, int m = 100, int phi = 0) : x(x), y(y), vX(v), vY(v), m(m), phi(phi)
+	UFO(int x, int y, int v =0, int m = 1000, int phi = 0) : x(x), y(y), vX(v), vY(v), m(m), phi(phi)
 	{
 		string str;
 		str = "Реквизиты\\UFO\\" + to_string(s) + ".png";
@@ -36,10 +36,10 @@ public:
 
 	void Move(double dt) {
 
-		Fdown = m * 9.8; // Сила притяжения
-		Fup = 0.5 * vY * cos(phi);
-		Fstop = 0.5 * vX * cos(phi);
-		Fgo = diff(vX * m) / dt;
+		Fdown = m * 9.8; // g = 9.8
+		Fup = 0.5 * 0.033 * 1.2 * vY * vY * cos(phi); // C = 0.033; p = 1.2
+		Fstop = 0.5 * (0.34 * 650) / 13 * vX * vX * cos(phi); // K = 0.34; S = 650; X = K*S*v/13
+		Fgo = diff(1, vX * m) / dt; // F = m*a = d(m * v)/dt
 
 		vX += Fgo - Fstop;
 		vY += Fdown - Fup;
