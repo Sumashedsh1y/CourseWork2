@@ -37,15 +37,15 @@ public:
 	void Move(double dt) {
 
 		Fdown = m * 9.8; // g = 9.8
-		Fup = 0.5 * 0.033 * 1.2 * vY * vY * cos(phi); // C = 0.033; p = 1.2
-		Fstop = 0.5 * (0.34 * 650) / 13 * vX * vX * cos(phi); // K = 0.34; S = 650; X = K*S*v/13
+		Fup = 0.5 * 0.033 * 1.2 * vY * vY; // C = 0.033; p = 1.2
+		Fstop = 0.5 * (0.34 * 650) / 13 * vX * vX; // K = 0.34; S = 650; X = K*S*v/13
 		Fgo = diff(1, vX * m) / dt; // F = m*a = d(m * v)/dt
 
 		vX += Fgo - Fstop;
 		vY += Fdown - Fup;
 
-		x += vX * dt;
-		y += vY * dt;
+		x = vX * dt;
+		y = vY * dt;
 
 		herosprite.setRotation(phi);
 		herosprite.setPosition(Vector2f(x, y));
