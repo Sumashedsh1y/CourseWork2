@@ -6,11 +6,6 @@
 #define Pi 3.14
 using namespace std;
 using namespace sf;
-static float diff(float func, float x)
-{
-	const float h = 1e-10;
-	return (func * (x + h) - func * (x - h)) / (2.0f * h);
-}
 class UFO
 {	
 public:
@@ -39,7 +34,7 @@ public:
 		Fdown = m * 9.8; // g = 9.8
 		Fup = 0.5 * 0.033 * 1.2 * vY * vY; // C = 0.033; p = 1.2
 		Fstop = 0.5 * (0.34 * 650) / 13 * vX * vX; // K = 0.34; S = 650; X = K*S*v/13
-		Fgo = diff(1, vX * m) / dt; // F = m*a = d(m * v)/dt
+		Fgo = m * vX * dt); // F = m * a = m * dv/dt
 
 		vX += Fgo - Fstop;
 		vY += Fdown - Fup;
