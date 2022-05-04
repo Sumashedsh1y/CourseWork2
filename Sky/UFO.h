@@ -20,7 +20,7 @@ public:
 		return herosprite;
 	}
 
-	UFO(int x, int y, int v =0, int m = 1000, int phi = 0) : x(x), y(y), vX(v), vY(v), m(m), phi(phi)
+	UFO(int x, int y, int v = 1, int m = 1000, int phi = 0) : x(x), y(y), vX(v), vY(v), m(m), phi(phi)
 	{
 		string str;
 		str = "Реквизиты\\UFO\\" + to_string(s) + ".png";
@@ -32,8 +32,8 @@ public:
 	void Move(double dt) {
 
 		Fdown = m * 9.8; // g = 9.8
-		Fup = 0.5 * 0.033 * 1.2 * vY * vY; // C = 0.033; p = 1.2
-		Fstop = 0.5 * (0.34 * 650) / 13 * vX * vX; // K = 0.34; S = 650; X = K*S*v/13
+		Fup = 0.5 * 0.033 * 1.2 * vY; // C = 0.033; p = 1.2
+		Fstop = 0.5 * (0.34 * 100) / 13 * vX; // K = 0.34; S = 10; X = K*S*v/13
 		Fgo = m * vX * dt; // F = m * a = m * dv/dt
 
 		vX += Fgo - Fstop;
