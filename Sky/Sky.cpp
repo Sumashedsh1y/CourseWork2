@@ -102,14 +102,14 @@ int main()
         {
             Text txt;
             txt.setFont(font);
-            txt.setString(to_string(ufo1.phi));
+            txt.setString(to_string(ufo1.angle));
             txt.setCharacterSize(30);
             txt.setOutlineThickness(4.0f);
             txt.setPosition(10, 900);
 
             Text txt2;
             txt2.setFont(font);
-            txt2.setString("X ="+to_string(ufo1.x) + "\nY =" + to_string(ufo1.y));
+            txt2.setString("X ="+to_string(ufo1.position.x) + "\nY =" + to_string(ufo1.position.y));
             txt2.setCharacterSize(30);
             txt2.setOutlineThickness(4.0f);
             txt2.setPosition(10, 1000);
@@ -132,7 +132,7 @@ int main()
             r.go_anim(window);
             Sleep(30);
 
-            ufo1.Move(0.001f);
+            ufo1.Move(1e-2f);
             ufo1.setS(s);
             if (s < 16)
                 s++;

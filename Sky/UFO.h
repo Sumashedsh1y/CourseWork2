@@ -10,40 +10,58 @@ class UFO
 {	
 public:
 	int s = 1, i = 0;
-	double x = 50, y = 150;
+	float x = 50, y = 150;
+    int m;
 
-	double vX, vY, m, phi;
-	double Fup, Fdown, Fgo, Fstop;
+    Vector2f position;
+    Vector2f v;
+    Vector2f a;
+    float angle = 0;
+    float v_phi;
 
 	Sprite herosprite;Texture herotexture;
 	Sprite& Get() {
 		return herosprite;
 	}
 
-	UFO(int x, int y, int v = 1, int m = 1000, int phi = 0) : x(x), y(y), vX(v), vY(v), m(m), phi(phi)
+	UFO(int x, int y, int m = 100) : x(x), y(y), m(m)
 	{
 		string str;
 		str = "Реквизиты\\UFO\\" + to_string(s) + ".png";
 		herotexture.loadFromFile(str);
 		herosprite.setTexture(herotexture);
 		herosprite.setPosition(Vector2f(x, y));
+        position = Vector2f(x, y);
 	}
 
-	void Move(double dt) {
+	void Move(float dt) {
 
-		Fdown = m * 9.8; // g = 9.8
-		Fup = 0.5 * 0.033 * 1.2 * vY; // C = 0.033; p = 1.2
-		Fstop = 0.5 * (0.34 * 100) / 13 * vX; // K = 0.34; S = 10; X = K*S*v/13
-		Fgo = m * vX * dt; // F = m * a = m * dv/dt
+        a = Vector2f(0, 0);
 
-		vX += Fgo - Fstop;
-		vY += Fdown - Fup;
+        a.y += m * 9.8;
 
-		x = vX * dt;
-		y = vY * dt;
+        Vector2f forward = Vector2f(cosf(angle), sinf(angle));
+        Vector2f up = Vector2f(cosf(angle + Pi / 2.0f), sinf(angle + Pi / 2.0f));
+        float vP = v.x * up.x + v.y * up.y;
+        a += -up * vP * vP; // *someCoefficient;
 
-		herosprite.setRotation(phi);
-		herosprite.setPosition(Vector2f(x, y));
+        float thrust = 0;
+
+        a += forward * thrust;
+
+        float a_phi = 0;
+
+        v += a * dt;
+        v_phi += a_phi * dt;
+
+        //v *= exp(-dt); // * frictionCoef);
+        //v_phi *= exp(-dt); // * angularFrictionCoef);
+
+        angle += a_phi * dt;
+        position += v * dt;
+
+        herosprite.setRotation(angle);
+        herosprite.setPosition(position);
 	}
 
 	Sprite ufo();
