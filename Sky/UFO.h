@@ -18,6 +18,8 @@ public:
     Vector2f a;
     float angle = 0;
     float v_phi;
+    float thrust = 0;
+    float a_phi = 0;
 
 	Sprite herosprite;Texture herotexture;
 	Sprite& Get() {
@@ -45,11 +47,7 @@ public:
         float vP = v.x * up.x + v.y * up.y;
         a += -up * vP * vP; // *someCoefficient;
 
-        float thrust = 0;
-
         a += forward * thrust;
-
-        float a_phi = 0;
 
         v += a * dt;
         v_phi += a_phi * dt;

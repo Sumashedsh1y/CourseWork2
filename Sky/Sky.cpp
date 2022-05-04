@@ -124,6 +124,14 @@ int main()
                 if (event.type == Event::KeyPressed) {
                     if (event.key.code == Keyboard::Space)
                         wind = 1;
+                    if (event.key.code == Keyboard::W)
+                        ufo1.thrust += 10;
+                    if (event.key.code == Keyboard::S)
+                        ufo1.thrust -= 10;
+                    if (event.key.code == Keyboard::A)
+                        ufo1.a_phi += 1;
+                    if (event.key.code == Keyboard::D)
+                        ufo1.a_phi -= 1;
                 }
             }
             window.clear();
