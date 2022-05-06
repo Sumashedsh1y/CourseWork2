@@ -114,6 +114,20 @@ int main()
             txt2.setOutlineThickness(4.0f);
             txt2.setPosition(10, 1000);
 
+            Text txt3;
+            txt3.setFont(font);
+            txt3.setString("aX =" + to_string(ufo1.a.x) + " aY =" + to_string(ufo1.a.y));
+            txt3.setCharacterSize(20);
+            txt3.setOutlineThickness(4.0f);
+            txt3.setPosition(10, 940);
+
+            Text txt4;
+            txt4.setFont(font);
+            txt4.setString("dvX =" + to_string(ufo1.dv.x) + " dvY =" + to_string(ufo1.dv.y));
+            txt4.setCharacterSize(20);
+            txt4.setOutlineThickness(4.0f);
+            txt4.setPosition(10, 970);
+
             Event event;
 
             while (window.pollEvent(event))
@@ -123,15 +137,15 @@ int main()
                         window.close();
                 if (event.type == Event::KeyPressed) {
                     if (event.key.code == Keyboard::Space)
-                        wind = 1;
+                        wind += 1;
                     if (event.key.code == Keyboard::W)
                         ufo1.thrust += 10;
                     if (event.key.code == Keyboard::S)
                         ufo1.thrust -= 10;
                     if (event.key.code == Keyboard::A)
-                        ufo1.a_phi += 1;
-                    if (event.key.code == Keyboard::D)
                         ufo1.a_phi -= 1;
+                    if (event.key.code == Keyboard::D)
+                        ufo1.a_phi += 1;
                 }
             }
             window.clear();
@@ -152,7 +166,7 @@ int main()
             else
                 i = 1;
 
-            if (wind == 1) {
+            if (wind % 2 == 1) {
                 Png W("Реквизиты\\wind\\", w);
                 W.go_anim(window);
                 Sleep(1);
@@ -163,6 +177,8 @@ int main()
             }
             window.draw(txt);
             window.draw(txt2);
+            window.draw(txt3);
+            window.draw(txt4);
             window.draw(ufo1.ufo());
             window.display();
         }

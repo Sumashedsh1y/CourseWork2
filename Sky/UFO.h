@@ -14,10 +14,10 @@ public:
     int m;
 
     Vector2f position;
-    Vector2f v;
+    Vector2f dv;
     Vector2f a;
     float angle = 0;
-    float v_phi;
+    float v_phi = 0;
     float thrust = 0;
     float a_phi = 0;
 
@@ -34,29 +34,38 @@ public:
 		herosprite.setTexture(herotexture);
 		herosprite.setPosition(Vector2f(x, y));
         position = Vector2f(x, y);
+        dv.x = 100;
+        dv.y = +0;
 	}
 
 	void Move(float dt) {
 
         a = Vector2f(0, 0);
 
-        a.y += m * 9.8;
+        a.y += m * 9.8; // Fdown
 
-        Vector2f forward = Vector2f(cosf(angle), sinf(angle));
-        Vector2f up = Vector2f(cosf(angle + Pi / 2.0f), sinf(angle + Pi / 2.0f));
-        float vP = v.x * up.x + v.y * up.y;
-        a += -up * vP * vP; // *someCoefficient;
+        Vector2f forward = Vector2f(cosf(angle), sinf(angle)); // Fgo
+        Vector2f up = Vector2f(cosf(angle + Pi / 2), sinf(angle + Pi / 2)); // Fup
+        float vP = dv.x * up.x + dv.y * up.y; // Проекция скорости
+        
+        
+        float rs2 = 20.f/m, cd=0.05, cl=0.2;
 
-        a += forward * thrust;
+        a.x -= cd * dv.x * dv.x * rs2;
+        a.y -= cl * dv.x * dv.x * rs2;
+        //a -= vP * up; // *someCoefficient;
 
-        v += a * dt;
+        a += forward * thrust*100.0f;
+        thrust = 0;
+
+        dv += a * dt;
         v_phi += a_phi * dt;
 
-        //v *= exp(-dt); // * frictionCoef);
-        //v_phi *= exp(-dt); // * angularFrictionCoef);
+        //v *= exp(-dt); // * frictionCoef); // Сила трения
+        //v_phi *= exp(-dt); // * angularFrictionCoef); // Угловое трение
 
-        angle += a_phi * dt;
-        position += v * dt;
+        angle += v_phi * dt;
+        position += dv * dt;
 
         herosprite.setRotation(angle);
         herosprite.setPosition(position);
