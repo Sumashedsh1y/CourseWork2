@@ -10,7 +10,7 @@ class UFO
 {	
 public:
 	int s = 1, i = 0;
-	float x = 50, y = 150;
+	double x = 50, y = 150;
     int m;
 
     double positionX;
@@ -39,7 +39,7 @@ public:
         positionX = x;
         positionY = y;
         dvX = 100;
-        dvY = +0;
+        dvY = 0;
 	}
 
 	void Move(double dt) {
@@ -49,18 +49,18 @@ public:
 
         aY += m * 9.8; // Fdown
 
-        double forwardX = cosf(angle);
-        double forwardY = sinf(angle);
-        double upX = cosf(angle + Pi / 2);
-        double upY = sinf(angle + Pi / 2);
+        double forwardX = cos(angle);
+        double forwardY = sin(angle);
+        double upX = cos(angle + Pi / 2);
+        double upY = sin(angle + Pi / 2);
         
-        float roS2 = 20.f/m, cd=0.05, cl=0.2; //  cl - коофициэнт подъемной силы, cd - коофициэнт лобового споротивления
-
+        double roS2 = 30.0/m, cd=0.05, cl=0.2; //  cl - коофициэнт подъемной силы, cd - коофициэнт лобового споротивления
+        
         aX -= cd * dvX * dvX * roS2;
         aY -= cl * dvX * dvX * roS2;
 
-        aX += forwardX * thrust * 100.0f;
-        aY += forwardY * thrust * 100.0f;
+        aX += forwardX * thrust * 100.0;
+        aY += forwardY * thrust * 100.0;
         thrust = 0;
 
         dvX += aX * dt;

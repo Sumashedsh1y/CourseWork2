@@ -53,10 +53,10 @@ int main()
 
             Text txt3;
             txt3.setFont(font);
-            txt3.setString(L"Windbreaker : Press Enter");
+            txt3.setString(L"Cessna650: Press Enter");
             txt3.setCharacterSize(70);
             txt3.setOutlineThickness(4.0f);
-            txt3.setPosition(700, 500);
+            txt3.setPosition(725, 500);
 
             while (window.pollEvent(event))
             {
