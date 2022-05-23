@@ -26,7 +26,7 @@ public:
     double v_phi = 0;
     double thrust = 0;
     double a_phi = 0;
-    double SAX = l / (12 * S); // Средняя аэродинамическая хорда крыла 1/2*int(x^2,0,l/2)
+    double SAX = l * l * l / (12 * S); // Средняя аэродинамическая хорда крыла 1/2*int(x^2,0,l/2)
     double ro = 1.225;
     double Mz, mz = 0;
     double cd = 0.033, cl = cd + 0.02 + 0.02; //  cl - коофициэнт подъемной силы, cd - коофициэнт лобового споротивления
@@ -69,12 +69,12 @@ public:
         aY += forwardY * thrust * 100.0;
         thrust = 0;
 
-        mz = 0.25 * cd;
-        Mz = mz * ro * dvX * dvX * S * SAX * 0.5;
+        //mz = 0.25 * cd;
+        //Mz = mz * ro * dvX * dvX * S * SAX * 0.5;
 
         dvX += aX * dt;
         dvY += aY * dt;
-        a_phi = Mz;
+        //a_phi = Mz * dt;
         v_phi = a_phi * dt;
 
         //v *= exp(-dt); // * frictionCoef); // Сила трения
