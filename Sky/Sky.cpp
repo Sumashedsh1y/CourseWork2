@@ -143,9 +143,9 @@ int main()
                     if (event.key.code == Keyboard::S)
                         ufo1.thrust -= 10;
                     if (event.key.code == Keyboard::A)
-                        ufo1.a_phi -= 1;
+                        ufo1.m0 -= 0.1;
                     if (event.key.code == Keyboard::D)
-                        ufo1.a_phi += 1;
+                        ufo1.m0 += 0.1;
                 }
             }
             window.clear();

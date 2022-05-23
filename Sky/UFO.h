@@ -28,7 +28,7 @@ public:
     double a_phi = 0;
     double SAX = l * l * l / (12 * S); // Средняя аэродинамическая хорда крыла 1/2*int(x^2,0,l/2)
     double ro = 1.225;
-    double Mz, mz = 0;
+    double Mz, mz = 0, m0 = 0;
     double cd = 0.033, cl = cd + 0.02 + 0.02; //  cl - коофициэнт подъемной силы, cd - коофициэнт лобового споротивления
 
 	Sprite herosprite;Texture herotexture;
@@ -64,7 +64,7 @@ public:
         aY += thrust * 100.0 * cos(angle);
         thrust = 0;
 
-        mz = 0.25 * cd;
+        mz = m0 + 0.25 * cd;
         Mz = mz * ro * dvX * dvX * S * SAX * 0.5;
 
         dvX += aX * dt;
@@ -75,6 +75,8 @@ public:
         angle += v_phi * dt;
         positionX += dvX * dt;
         positionY += dvY * dt;
+
+        m0 = 0;
 
         herosprite.setRotation(angle);
         herosprite.setPosition(positionX, positionY);
