@@ -66,9 +66,9 @@ public:
         mz = m0 + 0.25 * cd;
         Mz = mz * ro * dvX * dvX * S * SAX * 0.5;
 
+        a_phi = Mz * dt;
         dvX += aX * dt;
         dvY += aY * dt;
-        a_phi = Mz * dt;
         v_phi = a_phi * dt;
 
         angle += v_phi * dt;
