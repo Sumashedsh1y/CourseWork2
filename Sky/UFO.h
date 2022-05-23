@@ -47,7 +47,8 @@ public:
         aX = 0;
         aY = 0;
 
-        aY += m * 9.8; // Fdown
+        aX += m * 9.8 * sin(angle);
+        aY += m * 9.8 * cos(angle);
 
         double forwardX = cos(angle);
         double forwardY = sin(angle);
