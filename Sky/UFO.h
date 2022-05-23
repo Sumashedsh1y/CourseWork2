@@ -13,6 +13,9 @@ public:
 	double x = 50, y = 150;
     int m;
 
+    double l = 16.3;
+    double S = 30.0;
+
     double positionX;
     double positionY;
     double dvX;
@@ -23,6 +26,10 @@ public:
     double v_phi = 0;
     double thrust = 0;
     double a_phi = 0;
+    double SAX = l / (12 * S); // Средняя аэродинамическая хорда крыла 1/2*int(x^2,0,l/2)
+    double ro = 1.225;
+    double Mz, mz = 0;
+    double cd = 0.033, cl = cd + 0.02 + 0.02; //  cl - коофициэнт подъемной силы, cd - коофициэнт лобового споротивления
 
 	Sprite herosprite;Texture herotexture;
 	Sprite& Get() {
@@ -55,18 +62,20 @@ public:
         double upX = cos(angle + Pi / 2);
         double upY = sin(angle + Pi / 2);
         
-        double roS2 = 30.0/m, cd=0.05, cl=0.2; //  cl - коофициэнт подъемной силы, cd - коофициэнт лобового споротивления
-        
-        aX -= cd * dvX * dvX * roS2;
-        aY -= cl * dvX * dvX * roS2;
+        aX -= cd * dvX * dvX * ro * S/m;
+        aY -= cl * dvX * dvX * ro * S/m;
 
         aX += forwardX * thrust * 100.0;
         aY += forwardY * thrust * 100.0;
         thrust = 0;
 
+        mz = 0.25 * cd;
+        Mz = mz * ro * dvX * dvX * S * SAX * 0.5;
+
         dvX += aX * dt;
         dvY += aY * dt;
-        v_phi += a_phi * dt;
+        a_phi = Mz;
+        v_phi = a_phi * dt;
 
         //v *= exp(-dt); // * frictionCoef); // Сила трения
         //v_phi *= exp(-dt); // * angularFrictionCoef); // Угловое трение
