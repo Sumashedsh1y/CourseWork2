@@ -27,7 +27,7 @@ public:
     double thrust = 0;
     double a_phi = 0;
     double SAX = l * l * l / (12 * S); // Средняя аэродинамическая хорда крыла 1/2*int(x^2,0,l/2)
-    double ro = 1.225;
+    double ro = 1.225; // Плотность воздуха
     double Mz, mz = 0, m0 = 0;
     double cd = 0.033, cl = cd + 0.02 + 0.02; //  cl - коофициэнт подъемной силы, cd - коофициэнт лобового споротивления
 
@@ -57,14 +57,14 @@ public:
         aX += m * 9.8 * sin(angle);
         aY += m * 9.8 * cos(angle);
         
-        aX -= cd * dvX * dvX * ro * S/m * sin(angle);
-        aY -= cl * dvX * dvX * ro * S/m * cos(angle);
+        aX -= cd * dvX * dvX * ro * S / m * sin(angle);
+        aY -= cl * dvX * dvX * ro * S / m * cos(angle);
 
         aX += thrust * 10.0;
         aY += thrust * 10.0;
 
-        mz = m0 + 0.25 * cd;
-        Mz = mz * ro * dvX * dvX * S * SAX * 0.5;
+        mz = m0 + 0.25 * cd; // Момент тангажа
+        Mz = mz * ro * dvX * dvX * S * SAX * 0.5; // Тангаж
 
         a_phi = Mz * dt;
         dvX += aX * dt;
