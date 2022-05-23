@@ -60,9 +60,8 @@ public:
         aX -= cd * dvX * dvX * ro * S/m * sin(angle);
         aY -= cl * dvX * dvX * ro * S/m * cos(angle);
 
-        aX += thrust * 100.0 * sin(angle);
-        aY += thrust * 100.0 * cos(angle);
-        thrust = 0;
+        aX += thrust * 10.0;
+        aY += thrust * 10.0;
 
         mz = m0 + 0.25 * cd;
         Mz = mz * ro * dvX * dvX * S * SAX * 0.5;
@@ -76,6 +75,7 @@ public:
         positionX += dvX * dt;
         positionY += dvY * dt;
 
+        thrust = 0;
         m0 = 0;
 
         herosprite.setRotation(angle);
