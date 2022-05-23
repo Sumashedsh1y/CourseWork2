@@ -31,7 +31,8 @@ public:
     double Mz, mz = 0, m0 = 0;
     double cd = 0.033, cl = cd + 0.02 + 0.02; //  cl - коофициэнт подъемной силы, cd - коофициэнт лобового споротивления
 
-	Sprite herosprite;Texture herotexture;
+	Sprite herosprite;
+    Texture herotexture;
 	Sprite& Get() {
 		return herosprite;
 	}
