@@ -56,29 +56,21 @@ public:
 
         aX += m * 9.8 * sin(angle);
         aY += m * 9.8 * cos(angle);
-
-        double forwardX = cos(angle);
-        double forwardY = sin(angle);
-        double upX = cos(angle + Pi / 2);
-        double upY = sin(angle + Pi / 2);
         
-        aX -= cd * dvX * dvX * ro * S/m;
-        aY -= cl * dvX * dvX * ro * S/m;
+        aX -= cd * dvX * dvX * ro * S/m * sin(angle);
+        aY -= cl * dvX * dvX * ro * S/m * cos(angle);
 
-        aX += forwardX * thrust * 100.0;
-        aY += forwardY * thrust * 100.0;
+        aX += thrust * 100.0 * sin(angle);
+        aY += thrust * 100.0 * cos(angle);
         thrust = 0;
 
-        //mz = 0.25 * cd;
-        //Mz = mz * ro * dvX * dvX * S * SAX * 0.5;
+        mz = 0.25 * cd;
+        Mz = mz * ro * dvX * dvX * S * SAX * 0.5;
 
         dvX += aX * dt;
         dvY += aY * dt;
-        //a_phi = Mz * dt;
+        a_phi = Mz * dt;
         v_phi = a_phi * dt;
-
-        //v *= exp(-dt); // * frictionCoef); // Сила трения
-        //v_phi *= exp(-dt); // * angularFrictionCoef); // Угловое трение
 
         angle += v_phi * dt;
         positionX += dvX * dt;
