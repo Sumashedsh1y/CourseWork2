@@ -148,6 +148,7 @@
     <ClCompile Include="BackDoor.cpp" />
     <ClCompile Include="GifPng.cpp" />
     <ClCompile Include="PlaySong.cpp" />
+    <ClCompile Include="SavePlot.cpp" />
     <ClCompile Include="Sky.cpp" />
     <ClCompile Include="Anim.cpp" />
     <ClCompile Include="UFO.cpp" />
@@ -157,6 +158,7 @@
     <ClInclude Include="Anim.h" />
     <ClInclude Include="GifPng.h" />
     <ClInclude Include="PlaySong.h" />
+    <ClInclude Include="SavePlot.h" />
     <ClInclude Include="UFO.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

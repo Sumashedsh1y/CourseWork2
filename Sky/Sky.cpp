@@ -5,6 +5,7 @@
 #include "UFO.h"
 #include "Anim.h"
 #include "GifPng.h"
+#include "SavePlot.h"
 using namespace std;
 using namespace sf;
 int main()
@@ -20,6 +21,8 @@ int main()
     PlaySong q("Реквизиты\\Music\\Menu_Song.ogg");
     q.Play();
     PlaySong q2("Реквизиты\\Music\\Fly.ogg");
+
+    Plot plot;
 
     const Color colorArr[6] = { Color::Magenta, Color::Red, Color::Cyan, Color::White, Color::Yellow, Color::Green };
 
@@ -178,6 +181,7 @@ int main()
                 else
                     w = 1;
             }
+            plot.Save(ufo1);
             window.draw(txt);
             window.draw(txt2);
             window.draw(txt3);
