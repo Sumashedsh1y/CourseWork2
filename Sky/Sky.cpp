@@ -6,6 +6,9 @@
 #include "Anim.h"
 #include "GifPng.h"
 #include "SavePlot.h"
+#include <sstream>
+#include <iomanip>
+
 using namespace std;
 using namespace sf;
 int main()
@@ -17,6 +20,10 @@ int main()
 
     Font font;
     font.loadFromFile("Font.ttf");
+
+    Font font2;
+    font2.loadFromFile("consolas.ttf");
+
 
     PlaySong q("Реквизиты\\Music\\Menu_Song.ogg");
     q.Play();
@@ -104,29 +111,32 @@ int main()
         if (scene == 2)
         {
             Text txt;
-            txt.setFont(font);
-            txt.setString(to_string(ufo1.angle));
-            txt.setCharacterSize(30);
+            txt.setFont(font2);
+            txt.setString("LiftX: " + to_string(ufo1.liftX) + "\nLiftY: " + to_string(ufo1.liftY) + "\nAngle: " + to_string(ufo1.angle));
+            txt.setCharacterSize(20);
             txt.setOutlineThickness(4.0f);
-            txt.setPosition(10, 900);
+            txt.setPosition(10, 865);
 
             Text txt2;
-            txt2.setFont(font);
-            txt2.setString("X ="+to_string(ufo1.positionX) + "\nY =" + to_string(ufo1.positionY));
+            txt2.setFont(font2);
+
+            ostringstream oss;
+            oss<<"X = "<<fixed<<setw(10)<<setprecision(3)<<ufo1.positionX<<"\nY = " << fixed << setw(10) << setprecision(3) <<ufo1.positionY;
+            txt2.setString(oss.str());
             txt2.setCharacterSize(30);
             txt2.setOutlineThickness(4.0f);
             txt2.setPosition(10, 1000);
 
             Text txt3;
-            txt3.setFont(font);
-            txt3.setString("aX =" + to_string(ufo1.aX) + " aY =" + to_string(ufo1.aY));
+            txt3.setFont(font2);
+            txt3.setString("aX = " + to_string(ufo1.aX) + " aY = " + to_string(ufo1.aY));
             txt3.setCharacterSize(20);
             txt3.setOutlineThickness(4.0f);
             txt3.setPosition(10, 940);
 
             Text txt4;
-            txt4.setFont(font);
-            txt4.setString("dvX =" + to_string(ufo1.dvX) + " dvY =" + to_string(ufo1.dvY));
+            txt4.setFont(font2);
+            txt4.setString("dvX = " + to_string(ufo1.dvX) + " dvY = " + to_string(ufo1.dvY));
             txt4.setCharacterSize(20);
             txt4.setOutlineThickness(4.0f);
             txt4.setPosition(10, 970);
@@ -157,7 +167,7 @@ int main()
             r.go_anim(window);
             Sleep(30);
 
-            ufo1.Move(1e-2f);
+            ufo1.Move(0.1);
             ufo1.setS(s);
             if (s < 16)
                 s++;
