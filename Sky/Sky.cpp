@@ -151,10 +151,14 @@ int main()
                 if (event.type == Event::KeyPressed) {
                     if (event.key.code == Keyboard::Space)
                         wind += 1;
-                    if (event.key.code == Keyboard::W)
-                        ufo1.thrust += 10;
-                    if (event.key.code == Keyboard::S)
-                        ufo1.thrust -= 10;
+                    if (event.key.code == Keyboard::W) {
+                        ufo1.thrust += 5;
+                        ufo1.m0 -= 0.02;
+                    }
+                    if (event.key.code == Keyboard::S){
+                        ufo1.thrust -= 5;
+                        ufo1.m0 += 0.02;
+                }
                     if (event.key.code == Keyboard::A)
                         ufo1.m0 -= 0.1;
                     if (event.key.code == Keyboard::D)

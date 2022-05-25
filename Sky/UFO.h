@@ -26,7 +26,7 @@ public:
     double liftX,liftY;
     double angle = 0.0;
     double v_phi = 0.0;
-    double thrust = 0.0;
+    double thrust = 1.0;
     double a_phi = 0.0;
     double SAX = l * l * l / (12.0 * S); // —редн€€ аэродинамическа€ хорда крыла 1/2*int(x^2,0,l/2)
     double ro = 1.225; // ѕлотность воздуха
@@ -39,7 +39,7 @@ public:
 		return herosprite;
 	}
 
-	UFO(int x, int y, int m = 100) : x(x), y(y), m(m)
+	UFO(int x, int y, int m = 2000) : x(x), y(y), m(m)
 	{
 		string str;
 		str = "–еквизиты\\UFO\\" + to_string(s) + ".png";
@@ -59,8 +59,8 @@ public:
 
         aY += 9.8;
 
-        liftX = -cd * dvX * dvX * ro * S / m;
-        liftY = cl * dvX * dvX * ro * S / m;
+        liftX = -cd * dvX * dvX * ro * S * 0.5 / m;
+        liftY = cl * dvX * dvX * ro * S * 0.5 / m;
 
         aX += liftX * cos(angle / 180.0);
         aY += liftY * sin(-angle/180.0 - Pi / 2.0);
@@ -80,15 +80,16 @@ public:
         positionX += dvX * dt;
         positionY += dvY * dt;
 
-        thrust = 0.0;
+        thrust = 1.0;
         m0 = 0.0;
+        cd = 0.033;
 
         herosprite.setRotation(angle);
         herosprite.setPosition(positionX, positionY);
 	}
 
     void WindMove() {
-        positionX -= positionX / 100;
+        cd *= 3;
     }
 
 	Sprite ufo();
