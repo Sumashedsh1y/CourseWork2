@@ -80,7 +80,7 @@ public:
         positionX += dvX * dt;
         positionY += dvY * dt;
 
-        thrust = 1.0;
+        thrust = 0.0;
         m0 = 0.0;
         cd = 0.033;
 
