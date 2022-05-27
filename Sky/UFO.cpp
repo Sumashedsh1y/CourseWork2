@@ -42,12 +42,14 @@ void UFO::Move(double dt) {
     thrust = 0.0;
     m0 = 0.0;
     cd = 0.033;
+    cl = 0.02 + 0.033 * 0.033 / Pi;
 
     herosprite.setRotation(angle);
     herosprite.setPosition(positionX, positionY);
 }
 void UFO::WindMove() {
 	cd *= 3;
+    cl *= 3;
 }
 Sprite UFO::ufo()
 {
