@@ -48,8 +48,10 @@ void UFO::Move(double dt) {
     herosprite.setPosition(positionX, positionY);
 }
 void UFO::WindMove() {
+
 	cd *= 3;
     cl *= 3;
+
 }
 Sprite UFO::ufo()
 {
