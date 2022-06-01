@@ -17,6 +17,7 @@ public:
     double l = 16.3;
     double S = 30.0;
 
+    double dt = 0;
     double positionX;
     double positionY;
     double dvX;

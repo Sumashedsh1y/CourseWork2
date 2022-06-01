@@ -49,8 +49,7 @@ void UFO::Move(double dt) {
 }
 void UFO::WindMove() {
 
-	cd *= 3;
-    cl *= 3;
+    aX -= 0.6 * dt;
 
 }
 Sprite UFO::ufo()
